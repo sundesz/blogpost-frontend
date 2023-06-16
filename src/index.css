@@ -1,0 +1,143 @@
+#app-name {
+  font-weight: bold;
+}
+
+.right-side-link {
+  gap: 10px;
+}
+
+.right-side-link .nav-link {
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.right-side-link .nav-link .link-description {
+  font-size: 12px;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  color: #002050;
+}
+
+.navbar-dark .navbar-text {
+  color: #fff;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.author-container,
+.blog-container {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  /* justify-content: space-evenly; */
+}
+
+.author-container .card,
+.blog-container .card {
+  width: 25rem;
+}
+
+.blog-container .card a {
+  text-decoration: none;
+}
+
+.author-container .card a {
+  text-transform: capitalize;
+}
+
+.reaction-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.go-back {
+  cursor: pointer;
+  text-align: center;
+  color: #0d6efd;
+}
+
+.page-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.page {
+  min-height: 80vh;
+}
+
+.bg-lightgray {
+  background-color: #d3d3d3;
+}
+
+.checkbox {
+  width: 30px;
+  height: 30px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.author-misc {
+  display: flex;
+  justify-content: space-between;
+}
+
+.blog-date {
+  font-style: italic;
+}
+
+.comment-date,
+.comment {
+  font-size: 0.9rem;
+}
+
+.user-name,
+.commenter {
+  text-transform: capitalize;
+}
+
+.comment-heading {
+  display: flex;
+  gap: 10px;
+  text-transform: capitalize;
+  font-weight: bold;
+}
+
+.blog-review-title,
+.comment-title {
+  font-weight: bold;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.blog-star {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.progress {
+  width: 150px;
+}
+
+.crud-button {
+  display: flex;
+  gap: 10px;
+}
+
+.no-data {
+  text-align: center;
+  width: 100%;
+  font-weight: bold;
+}
