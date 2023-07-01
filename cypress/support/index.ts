@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 /// <reference types="cypress" />
 
-interface ISignUp {
+interface SignUp {
   name: string;
   email: string;
   role: string;
@@ -12,6 +12,6 @@ interface ISignUp {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 declare namespace Cypress {
   interface Chainable {
-    createUser(signUpData: ISignUp): void;
+    createUser(signUpData: SignUp): void;
   }
 }

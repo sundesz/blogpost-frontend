@@ -1,6 +1,6 @@
 import { message } from '../../src/utils/notificationMessage';
 
-interface ISignUp {
+interface SignUp {
   name: string;
   email: string;
   role: string;
@@ -11,7 +11,7 @@ interface ISignUp {
 // TODO:: save SERVER_BASE_URL in env file
 const SERVER_BASE_URL = 'http://localhost:8080/api/v1';
 
-const authorUser: ISignUp = {
+const authorUser: SignUp = {
   name: 'test author',
   email: 'test@author1.fi',
   role: 'author',
@@ -19,7 +19,7 @@ const authorUser: ISignUp = {
   confirmPassword: 'test123456',
 };
 
-const authorUser2: ISignUp = {
+const authorUser2: SignUp = {
   name: 'test author 2',
   email: 'test@author2.fi',
   role: 'author',
@@ -27,7 +27,7 @@ const authorUser2: ISignUp = {
   confirmPassword: 'test123456',
 };
 
-const adminUser: ISignUp = {
+const adminUser: SignUp = {
   name: 'admin',
   email: 'admin@admin.fi',
   role: 'admin',
