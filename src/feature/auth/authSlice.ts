@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import { ILoginResponse, UserRoleType } from '../../types';
+import { LoginResponse, UserRoleType } from '../../types';
 import { BASE_URL } from '../../app/api/apiSlice';
 
-export interface IAuthState {
+export interface AuthState {
   isAuthenticated: boolean;
   userId: string;
   email: string;
@@ -12,7 +12,7 @@ export interface IAuthState {
   role: UserRoleType | null;
 }
 
-const initialState: IAuthState = {
+const initialState: AuthState = {
   isAuthenticated: false,
   userId: '',
   email: '',
@@ -20,26 +20,26 @@ const initialState: IAuthState = {
   role: null,
 };
 
-export interface IUnknownError {
+export interface UnknownError {
   message: string;
 }
 
 export const refetchSession = createAsyncThunk<
-  ILoginResponse,
+  LoginResponse,
   undefined,
-  { rejectValue: IUnknownError }
+  { rejectValue: UnknownError }
 >('auth/session', async (_, thunkApi) => {
   const response = await fetch(`${BASE_URL}/session`);
 
   if (response.status !== 200) {
     return thunkApi.rejectWithValue({
       message: 'Failed to fetch',
-    } as IUnknownError);
+    } as UnknownError);
   }
 
   const sessionData = (await response.json()) as {
     status: boolean;
-    data: ILoginResponse;
+    data: LoginResponse;
   };
 
   if (sessionData.status) {
@@ -59,7 +59,7 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setCredentials: (state, action: PayloadAction<ILoginResponse>) => {
+    setCredentials: (state, action: PayloadAction<LoginResponse>) => {
       const { userId, email, name, role } = action.payload;
 
       state.isAuthenticated = true;
@@ -76,7 +76,7 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(
       refetchSession.fulfilled,
-      (state: IAuthState, action: PayloadAction<ILoginResponse>) => {
+      (state: AuthState, action: PayloadAction<LoginResponse>) => {
         const { isAuthenticated, userId, name, email, role } = action.payload;
         state.isAuthenticated = isAuthenticated!;
         state.userId = userId;
