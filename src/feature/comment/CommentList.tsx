@@ -1,12 +1,12 @@
-import { IBlog, IComment } from '../../types';
+import { Blog, Comment } from '../../types';
 import BlogRating from './BlogRating';
 import SingleComment from './SingleComment';
 
-interface ICommentListProps {
-  blog: IBlog;
+interface CommentListProps {
+  blog: Blog;
 }
 
-const CommentList: React.FC<ICommentListProps> = ({ blog }) => {
+const CommentList: React.FC<CommentListProps> = ({ blog }) => {
   const comments = blog.comments;
 
   return (

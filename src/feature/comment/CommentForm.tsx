@@ -6,11 +6,11 @@ import {
   TextAreaField,
   SelectField,
 } from '../../utils';
-import { ICreateUpdateCommentParams } from '../../types';
+import { CreateUpdateCommentParams } from '../../types';
 
-interface ICommentFormProps {
+interface CommentFormProps {
   blogId: string;
-  onSubmit: (values: ICreateUpdateCommentParams) => void;
+  onSubmit: (values: CreateUpdateCommentParams) => void;
 }
 
 const VALIDATION_SCHEMA = Yup.object().shape({
@@ -26,7 +26,7 @@ const VALIDATION_SCHEMA = Yup.object().shape({
     .oneOf([1, 2, 3, 4, 5], 'Rating is required'),
 });
 
-const CommentForm: React.FC<ICommentFormProps> = ({ blogId, onSubmit }) => {
+const CommentForm: React.FC<CommentFormProps> = ({ blogId, onSubmit }) => {
   const INITIAL_VALUES = {
     blogId,
     title: '',

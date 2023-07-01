@@ -1,13 +1,13 @@
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
-import { IComment } from '../../types';
+import { Comment } from '../../types';
 import Rating from './Rating';
 
-interface ISingleCommentProps {
-  comment: IComment;
+interface SingleCommentProps {
+  comment: Comment;
 }
 
-const SingleComment: React.FC<ISingleCommentProps> = ({ comment }) => {
+const SingleComment: React.FC<SingleCommentProps> = ({ comment }) => {
   const commenter = comment.user ? (
     <Link to={`/users/${comment.user.userId}`} state={{ user: comment.user }}>
       {comment.user.name}
