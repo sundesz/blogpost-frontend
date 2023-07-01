@@ -1,14 +1,14 @@
 import { apiSlice } from '../../app/api/apiSlice';
-import { IAuthor } from '../../types';
+import { Author } from '../../types';
 
 export const authorApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getAuthor: builder.query<IAuthor, string>({
+    getAuthor: builder.query<Author, string>({
       query: (authorId) => `/authors/${authorId}`,
       providesTags: ['Author'],
     }),
 
-    getAllAuthor: builder.query<IAuthor[], void>({
+    getAllAuthor: builder.query<Author[], void>({
       query: () => '/authors',
       providesTags: ['Authors'],
     }),
