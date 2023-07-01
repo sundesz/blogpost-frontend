@@ -2,10 +2,10 @@ import * as Yup from 'yup';
 import { Field, Form, Formik } from 'formik';
 
 import {
-  IAuthor,
+  Author,
   BlogCRUDType,
-  IBlog,
-  ICreateUpdateBlogParams,
+  Blog,
+  CreateUpdateBlogParams,
 } from '../../types';
 import { useAppSelector } from '../../hooks/reduxToolkit';
 import { selectCurrentUser } from '../auth/authSlice';
@@ -19,11 +19,11 @@ import {
 } from '../../utils';
 import PageTitle from '../../components/PageTitle';
 
-interface IBlogFormProps {
-  blog?: IBlog;
+interface BlogFormProps {
+  blog?: Blog;
   crudType: BlogCRUDType;
-  authors: IAuthor[];
-  onSubmit: (values: ICreateUpdateBlogParams) => void;
+  authors: Author[];
+  onSubmit: (values: CreateUpdateBlogParams) => void;
 }
 
 const VALIDATION_SCHEMA = Yup.object().shape({
@@ -36,7 +36,7 @@ const VALIDATION_SCHEMA = Yup.object().shape({
   author: Yup.string().required('Author is required'),
 });
 
-const BlogForm: React.FC<IBlogFormProps> = ({
+const BlogForm: React.FC<BlogFormProps> = ({
   blog,
   crudType,
   authors,

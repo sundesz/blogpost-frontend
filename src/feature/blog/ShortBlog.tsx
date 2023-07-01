@@ -1,12 +1,12 @@
 import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { IBlog } from '../../types';
+import { Blog } from '../../types';
 
-interface IBlogProps {
-  blog: IBlog;
+interface BlogProps {
+  blog: Blog;
 }
 
-const ShortBlog: React.FC<IBlogProps> = ({ blog }) => {
+const ShortBlog: React.FC<BlogProps> = ({ blog }) => {
   return (
     <Card>
       <Card.Body>

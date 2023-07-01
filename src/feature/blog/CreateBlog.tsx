@@ -2,7 +2,7 @@ import { Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useCreateBlogMutation } from './blogApiSlice';
-import { ICreateUpdateBlogParams } from '../../types';
+import { CreateUpdateBlogParams } from '../../types';
 import Loading from '../../components/Loading';
 import BlogForm from './BlogForm';
 import { useGetAllAuthorQuery } from '../author/authorApiSlice';
@@ -25,7 +25,7 @@ const CreateBlog: React.FC = () => {
     return <ErrorPage error={error} />;
   }
 
-  const onSubmit = async (newBlogData: ICreateUpdateBlogParams) => {
+  const onSubmit = async (newBlogData: CreateUpdateBlogParams) => {
     try {
       const createdBlogSlug = await createBlog({
         ...newBlogData,

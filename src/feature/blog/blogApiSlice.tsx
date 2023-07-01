@@ -1,26 +1,26 @@
 import { apiSlice } from '../../app/api/apiSlice';
 import {
-  IBlog,
-  IBlogRating,
-  IBlogResponse,
-  ICreateUpdateBlogParams,
-  IReaction,
-  IUpdateReactionParams,
+  Blog,
+  BlogRatingAttributes,
+  BlogResponse,
+  CreateUpdateBlogParams,
+  Reaction,
+  UpdateReactionParams,
 } from '../../types';
 
 export const blogApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getAllBlog: builder.query<IBlog[], void>({
+    getAllBlog: builder.query<Blog[], void>({
       query: () => '/blogs',
       providesTags: ['Blogs'],
     }),
 
-    getBlog: builder.query<IBlog, string>({
+    getBlog: builder.query<Blog, string>({
       query: (blogSlug) => ({
         url: `/blogs/${blogSlug}`,
       }),
       // https://redux-toolkit.js.org/rtk-query/usage-with-typescript#typing-query-and-mutation-endpoints
-      transformResponse: (responseData: IBlogResponse) => {
+      transformResponse: (responseData: BlogResponse) => {
         const {
           thumbsUp,
           wow,
@@ -33,13 +33,13 @@ export const blogApiSlice = apiSlice.injectEndpoints({
           ...blog
         } = responseData;
 
-        const reaction: IReaction = {
+        const reaction: Reaction = {
           thumbsUp: thumbsUp ?? 0,
           wow: wow ?? 0,
           heart: heart ?? 0,
         };
 
-        const blogRating: IBlogRating = {
+        const blogRating: BlogRatingAttributes = {
           rating1: rating1 ?? 0,
           rating2: rating2 ?? 0,
           rating3: rating3 ?? 0,
@@ -47,13 +47,13 @@ export const blogApiSlice = apiSlice.injectEndpoints({
           rating5: rating5 ?? 0,
         };
 
-        return { ...(blog as IBlog), reaction, blogRating };
+        return { ...(blog as Blog), reaction, blogRating };
       },
 
       providesTags: ['Blog'],
     }),
 
-    createBlog: builder.mutation<string, ICreateUpdateBlogParams>({
+    createBlog: builder.mutation<string, CreateUpdateBlogParams>({
       query: (newBlog) => ({
         url: `/blogs`,
         method: 'POST',
@@ -68,7 +68,7 @@ export const blogApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: ['Blogs', 'Authors'],
     }),
 
-    updateBlog: builder.mutation<string, ICreateUpdateBlogParams>({
+    updateBlog: builder.mutation<string, CreateUpdateBlogParams>({
       query: (updateBlog) => ({
         url: `/blogs/${updateBlog.blogId}`,
         method: 'PUT',
@@ -84,7 +84,7 @@ export const blogApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: ['Blogs', 'Blog'],
     }),
 
-    updateReaction: builder.mutation<IBlog, IUpdateReactionParams>({
+    updateReaction: builder.mutation<Blog, UpdateReactionParams>({
       query: (blog) => ({
         url: `/reactions/${blog.blogId}`,
         method: 'POST',
