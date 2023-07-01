@@ -1,9 +1,9 @@
 import GoBack from './GoBack';
 
-interface IPageTitleProps {
+interface PageTitleProps {
   title: string;
 }
-const PageTitle: React.FC<IPageTitleProps> = ({ title }) => {
+const PageTitle: React.FC<PageTitleProps> = ({ title }) => {
   return (
     <div className="page-title mb-5">
       <h1 className="display-5 fw-bold">{title}</h1>
