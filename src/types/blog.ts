@@ -1,8 +1,8 @@
-import { IAuthor } from './author';
-import { IComment } from './comment';
-import { IReaction } from './reaction';
-import { IBlogRating } from './rating';
-export interface IBlogResponse {
+import { Author } from './author';
+import { Comment } from './comment';
+import { Reaction } from './reaction';
+import { BlogRating } from './rating';
+export interface BlogResponse {
   blogId: string;
   title: string;
   content: string;
@@ -16,24 +16,24 @@ export interface IBlogResponse {
   rating3: number;
   rating4: number;
   rating5: number;
-  user: IAuthor;
-  comments: IComment[];
+  user: Author;
+  comments: Comment[];
 }
 
-export interface IBlog {
+export interface Blog {
   blogId: string;
   title: string;
   content: string;
   slug: string;
   published: boolean;
   updatedAt?: string;
-  user: IAuthor;
-  reaction: IReaction;
-  comments: IComment[];
-  blogRating: IBlogRating;
+  user: Author;
+  reaction: Reaction;
+  comments: Comment[];
+  blogRating: BlogRating;
 }
 
-export interface ICreateUpdateBlogParams {
+export interface CreateUpdateBlogParams {
   blogId?: string;
   title: string;
   content: string;

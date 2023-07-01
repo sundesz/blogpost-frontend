@@ -1,6 +1,6 @@
-import { IBlog } from './blog';
-import { IUser } from './user';
+import { Blog } from './blog';
+import { User } from './user';
 
-export type IAuthor = IUser & {
-  blogs?: IBlog[];
+export type Author = User & {
+  blogs?: Blog[];
 };
