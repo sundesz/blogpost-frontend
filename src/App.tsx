@@ -5,19 +5,19 @@ import Page404 from './components/Page404';
 import Login from './feature/auth/Login';
 import Logout from './feature/auth/Logout';
 import RequireAuth from './feature/auth/RequireAuth';
-import BlogList from './feature/blog/BlogList';
-import CreateBlog from './feature/blog/CreateBlog';
-import SingleBlog from './feature/blog/SingleBlog';
-import UpdateBlog from './feature/blog/UpdateBlog';
+import CreateBlog from './feature/blogs/CreateBlog';
+import SingleBlog from './feature/blogs/SingleBlog';
+import UpdateBlog from './feature/blogs/UpdateBlog';
 import Home from './feature/home/Home';
 import SignUp from './feature/signup/SignUp';
 import 'react-toastify/dist/ReactToastify.css';
 import RequireNoAuth from './feature/auth/RequireNoAuth';
-import SingleAuthor from './feature/author/SingleAuthor';
+import SingleAuthor from './feature/authors/SingleAuthor';
 import CreateComment from './feature/comment/CreateComment';
 import SingleUser from './feature/user/SingleUser';
 import SingleComment from './feature/comment/SingleComment';
-import Author from './feature/author';
+import Authors from './feature/authors';
+import Blogs from './feature/blogs';
 
 const App = () => {
   return (
@@ -32,12 +32,12 @@ const App = () => {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="blogs">
-            <Route index element={<BlogList />} />
+            <Route index element={<Blogs />} />
             <Route path=":blogSlug" element={<SingleBlog />} />
           </Route>
 
           <Route path="authors">
-            <Route index element={<Author />} />
+            <Route index element={<Authors />} />
             <Route path=":authorId" element={<SingleAuthor />} />
           </Route>
           <Route path="users/:userId" element={<SingleUser />} />
