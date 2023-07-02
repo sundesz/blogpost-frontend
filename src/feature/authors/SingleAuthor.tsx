@@ -4,7 +4,7 @@ import ErrorPage from '../../components/ErrorPage';
 import Loading from '../../components/Loading';
 import PageTitle from '../../components/PageTitle';
 import { capitalize } from '../../utils';
-import ShortBlog from '../blog/ShortBlog';
+import ShortBlog from '../blogs/ShortBlog';
 import { useGetAuthorQuery } from './authorApiSlice';
 
 const SingleAuthor = () => {

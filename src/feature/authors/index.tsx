@@ -8,7 +8,7 @@ import { Container } from 'react-bootstrap';
 import { useSearchQuery } from '../../hooks/useSearchQuery';
 import Filter from '../Filter';
 
-const Author = () => {
+const Authors = () => {
   const { pageNumber, filterName, filterValue, orderBy, orderDir } =
     useSearchQuery({});
 
@@ -74,4 +74,4 @@ const Author = () => {
   );
 };
 
-export default Author;
+export default Authors;
