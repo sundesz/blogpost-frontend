@@ -17,3 +17,4 @@ export * from './comment';
 export * from './rating';
 export * from './reaction';
 export * from './user';
+export * from './pagination';
