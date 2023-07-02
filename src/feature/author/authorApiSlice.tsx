@@ -1,5 +1,10 @@
 import { apiSlice } from '../../app/api/apiSlice';
-import { Author, GetAllRequestQuery, PaginationResponse } from '../../types';
+import {
+  Author,
+  AuthorNames,
+  GetAllRequestQuery,
+  PaginationResponse,
+} from '../../types';
 
 export const authorApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -8,6 +13,14 @@ export const authorApiSlice = apiSlice.injectEndpoints({
      */
     getAuthor: builder.query<Author, string>({
       query: (authorId) => `/authors/${authorId}`,
+      providesTags: ['Author'],
+    }),
+
+    /**
+     * Get all author names
+     */
+    getAuthorNames: builder.query<AuthorNames[], void>({
+      query: () => `/authors/names`,
       providesTags: ['Author'],
     }),
 
@@ -25,4 +38,8 @@ export const authorApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetAuthorQuery, useGetAllAuthorQuery } = authorApiSlice;
+export const {
+  useGetAuthorQuery,
+  useGetAllAuthorQuery,
+  useGetAuthorNamesQuery,
+} = authorApiSlice;
