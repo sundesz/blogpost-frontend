@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 import { Field, Form, Formik } from 'formik';
 
 import {
-  Author,
+  AuthorNames,
   BlogCRUDType,
   Blog,
   CreateUpdateBlogParams,
@@ -22,7 +22,7 @@ import PageTitle from '../../components/PageTitle';
 interface BlogFormProps {
   blog?: Blog;
   crudType: BlogCRUDType;
-  authors: Author[];
+  authors: AuthorNames[];
   onSubmit: (values: CreateUpdateBlogParams) => void;
 }
 

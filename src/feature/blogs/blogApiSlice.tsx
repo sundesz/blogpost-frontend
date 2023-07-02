@@ -4,14 +4,18 @@ import {
   BlogRatingAttributes,
   BlogResponse,
   CreateUpdateBlogParams,
+  GetAllRequestQuery,
+  PaginationResponse,
   Reaction,
   UpdateReactionParams,
 } from '../../types';
 
 export const blogApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getAllBlog: builder.query<Blog[], void>({
-      query: () => '/blogs',
+    getAllBlog: builder.query<PaginationResponse<Blog>, GetAllRequestQuery>({
+      query: ({ page, orderBy, orderDir, filterName, filterValue }) => ({
+        url: `blogs?page=${page}&orderBy=${orderBy}&orderDir=${orderDir}&name=${filterName}&value=${filterValue}`,
+      }),
       providesTags: ['Blogs'],
     }),
 

@@ -5,7 +5,7 @@ import { useUpdateBlogMutation } from './blogApiSlice';
 import { Blog, CreateUpdateBlogParams } from '../../types';
 import Loading from '../../components/Loading';
 import BlogForm from './BlogForm';
-import { useGetAllAuthorQuery } from '../author/authorApiSlice';
+import { useGetAllAuthorQuery } from '../authors/authorApiSlice';
 import slugify from 'slugify';
 import { slugifyOptions } from '../../config';
 import ErrorPage from '../../components/ErrorPage';
