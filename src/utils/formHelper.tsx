@@ -26,6 +26,15 @@ interface SelectProps extends FieldProps {
   selectOptions: { name: string; value: string }[];
 }
 
+interface FileProps extends FieldProps {
+  id?: string;
+  label?: string;
+  acceptType?: string;
+  formikProps?: any;
+}
+
+export const SUPPORTED_IMAGE_FORMATS = ['image/jpg', 'image/jpeg', 'image/png'];
+
 export const CustomInputField = ({
   id,
   field,
@@ -136,6 +145,47 @@ export const SelectField = ({
             </option>
           ))}
         </Field>
+
+        <div style={{ color: 'red' }}>
+          <ErrorMessage name={field.name} />
+        </div>
+      </Col>
+    </Form.Group>
+  );
+};
+
+const handleImageChange = (
+  event: React.ChangeEvent<HTMLInputElement>,
+  setFieldValue: any
+) => {
+  const file = event.currentTarget.files && event.currentTarget.files[0];
+  if (file) {
+    setFieldValue('image', file);
+  }
+};
+
+export const FileField = ({
+  id,
+  field,
+  label,
+  acceptType,
+  formikProps,
+}: FileProps): JSX.Element => {
+  return (
+    <Form.Group as={Row} className="mb-3">
+      <Form.Label column sm={GRID_LEFT}>
+        {label}
+      </Form.Label>
+      <Col sm={GRID_RIGHT}>
+        <input
+          id={id}
+          type="file"
+          className="form-control"
+          accept={acceptType}
+          onChange={(event) =>
+            handleImageChange(event, formikProps.setFieldValue)
+          }
+        />
 
         <div style={{ color: 'red' }}>
           <ErrorMessage name={field.name} />
