@@ -1,22 +1,14 @@
-import { Card, Container } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
-import ErrorPage from '../../components/ErrorPage'
-import Loading from '../../components/Loading'
-import { useGetAllAuthorQuery } from './authorApiSlice'
+import { Card, Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { Author } from '../../types';
 
-const AuthorList = () => {
-  const { data: authors, isError, error, isLoading } = useGetAllAuthorQuery()
+interface AuthorListProps {
+  authors: Author[];
+}
 
-  if (isLoading) {
-    return <Loading />
-  }
-
-  if (isError) {
-    return <ErrorPage error={error} />
-  }
-
+const AuthorList = ({ authors }: AuthorListProps) => {
   return (
-    <Container className='author-container py-5'>
+    <Container className="author-container py-5">
       {authors && authors.length ? (
         authors.map((author) => (
           <Card key={author.userId}>
@@ -34,10 +26,10 @@ const AuthorList = () => {
           </Card>
         ))
       ) : (
-        <div className='no-data'>No author yet.</div>
+        <div className="no-data">No author yet.</div>
       )}
     </Container>
-  )
-}
+  );
+};
 
-export default AuthorList
+export default AuthorList;
