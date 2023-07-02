@@ -1,40 +1,19 @@
-import { ErrorMessage, Field, FieldProps } from 'formik';
+import { ErrorMessage, Field } from 'formik';
 import { Button, Col, Form, Row } from 'react-bootstrap';
+import {
+  FileProps,
+  InputProps,
+  SelectProps,
+  TextAreaProps,
+} from '../types/formHelper';
 
 const GRID_LEFT = 4;
 const GRID_RIGHT = 8;
-
-interface InputProps extends FieldProps {
-  id?: string;
-  label?: string;
-  placeholder?: string;
-  type?: string;
-  bootstrapClass?: string;
-}
-
-interface TextAreaProps extends FieldProps {
-  id?: string;
-  label?: string;
-  placeholder?: string;
-  rows?: number;
-}
-
-interface SelectProps extends FieldProps {
-  id?: string;
-  label?: string;
-  disabledValue?: boolean;
-  selectOptions: { name: string; value: string }[];
-}
-
-interface FileProps extends FieldProps {
-  id?: string;
-  label?: string;
-  acceptType?: string;
-  formikProps?: any;
-}
-
 export const SUPPORTED_IMAGE_FORMATS = ['image/jpg', 'image/jpeg', 'image/png'];
 
+/**
+ * Input type custom
+ */
 export const CustomInputField = ({
   id,
   field,
@@ -58,6 +37,9 @@ export const CustomInputField = ({
   );
 };
 
+/**
+ * Input type "text"
+ */
 export const InputField = ({
   id,
   field,
@@ -88,6 +70,9 @@ export const InputField = ({
   );
 };
 
+/**
+ * Input type "text area"
+ */
 export const TextAreaField = ({
   id,
   field,
@@ -118,6 +103,9 @@ export const TextAreaField = ({
   );
 };
 
+/**
+ * Input type "select"
+ */
 export const SelectField = ({
   id,
   field,
@@ -154,7 +142,10 @@ export const SelectField = ({
   );
 };
 
-const handleImageChange = (
+/**
+ * Handle change for file upload
+ */
+const handleFileChange = (
   event: React.ChangeEvent<HTMLInputElement>,
   setFieldValue: any
 ) => {
@@ -164,6 +155,9 @@ const handleImageChange = (
   }
 };
 
+/**
+ * Input type "file"
+ */
 export const FileField = ({
   id,
   field,
@@ -183,7 +177,7 @@ export const FileField = ({
           className="form-control"
           accept={acceptType}
           onChange={(event) =>
-            handleImageChange(event, formikProps.setFieldValue)
+            handleFileChange(event, formikProps.setFieldValue)
           }
         />
 
