@@ -13,11 +13,11 @@ import Home from './feature/home/Home';
 import SignUp from './feature/signup/SignUp';
 import 'react-toastify/dist/ReactToastify.css';
 import RequireNoAuth from './feature/auth/RequireNoAuth';
-import AuthorList from './feature/author/AuthorList';
 import SingleAuthor from './feature/author/SingleAuthor';
 import CreateComment from './feature/comment/CreateComment';
 import SingleUser from './feature/user/SingleUser';
 import SingleComment from './feature/comment/SingleComment';
+import Author from './feature/author';
 
 const App = () => {
   return (
@@ -37,7 +37,7 @@ const App = () => {
           </Route>
 
           <Route path="authors">
-            <Route index element={<AuthorList />} />
+            <Route index element={<Author />} />
             <Route path=":authorId" element={<SingleAuthor />} />
           </Route>
           <Route path="users/:userId" element={<SingleUser />} />
