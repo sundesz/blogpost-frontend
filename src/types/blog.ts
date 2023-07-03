@@ -1,7 +1,7 @@
 import { Author } from './author';
 import { Comment } from './comment';
 import { Reaction } from './reaction';
-import { BlogRating } from './rating';
+import { BlogRatingAttributes } from './rating';
 export interface BlogResponse {
   blogId: string;
   title: string;
@@ -30,7 +30,7 @@ export interface Blog {
   user: Author;
   reaction: Reaction;
   comments: Comment[];
-  blogRating: BlogRating;
+  blogRating: BlogRatingAttributes;
 }
 
 export interface CreateUpdateBlogParams {
