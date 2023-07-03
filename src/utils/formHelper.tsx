@@ -1,4 +1,4 @@
-import { ErrorMessage, Field } from 'formik';
+import { ErrorMessage, Field, FieldProps } from 'formik';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import {
   FileProps,
@@ -89,7 +89,7 @@ export const TextAreaField = ({
       </Form.Label>
       <Col sm={gridRight}>
         <Field name={field.name}>
-          {({ field, form }: any) => (
+          {({ field, form }: FieldProps) => (
             <CKEditor
               editor={ClassicEditor}
               data={field.value}
