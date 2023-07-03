@@ -4,11 +4,12 @@ import {
   FileProps,
   InputProps,
   SelectProps,
+  SubmitButtonProps,
   TextAreaProps,
 } from '../types/formHelper';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
-const GRID_LEFT = 4;
-const GRID_RIGHT = 8;
 export const SUPPORTED_IMAGE_FORMATS = ['image/jpg', 'image/jpeg', 'image/png'];
 
 /**
@@ -47,13 +48,15 @@ export const InputField = ({
   bootstrapClass = 'form-control',
   placeholder,
   label,
+  gridLeft = 4,
+  gridRight = 8,
 }: InputProps): JSX.Element => {
   return (
     <Form.Group as={Row} className="mb-3">
-      <Form.Label column sm={GRID_LEFT}>
+      <Form.Label column sm={gridLeft}>
         {label}
       </Form.Label>
-      <Col sm={GRID_RIGHT}>
+      <Col sm={gridRight}>
         <Field
           id={id}
           className={bootstrapClass}
@@ -74,26 +77,29 @@ export const InputField = ({
  * Input type "text area"
  */
 export const TextAreaField = ({
-  id,
   field,
-  placeholder,
   label,
-  rows = 15,
+  gridLeft = 4,
+  gridRight = 8,
 }: TextAreaProps): JSX.Element => {
   return (
     <Form.Group as={Row} className="mb-3">
-      <Form.Label column sm={GRID_LEFT}>
+      <Form.Label column sm={gridLeft}>
         {label}
       </Form.Label>
-      <Col sm={GRID_RIGHT}>
-        <Field
-          id={id}
-          className="form-control"
-          placeholder={placeholder}
-          rows={rows}
-          component="textarea"
-          {...field}
-        />
+      <Col sm={gridRight}>
+        <Field name={field.name}>
+          {({ field, form }: any) => (
+            <CKEditor
+              editor={ClassicEditor}
+              data={field.value}
+              onChange={(event: any, editor: ClassicEditor) => {
+                const data = editor.getData();
+                form.setFieldValue(field.name, data);
+              }}
+            />
+          )}
+        </Field>
 
         <div style={{ color: 'red' }}>
           <ErrorMessage name={field.name} />
@@ -112,13 +118,15 @@ export const SelectField = ({
   label,
   disabledValue = false,
   selectOptions,
+  gridLeft = 4,
+  gridRight = 8,
 }: SelectProps): JSX.Element => {
   return (
     <Form.Group as={Row} className="mb-3">
-      <Form.Label column sm={GRID_LEFT}>
+      <Form.Label column sm={gridLeft}>
         {label}
       </Form.Label>
-      <Col sm={GRID_RIGHT}>
+      <Col sm={gridRight}>
         <Field
           id={id}
           className="form-select"
@@ -164,13 +172,15 @@ export const FileField = ({
   label,
   acceptType,
   formikProps,
+  gridLeft = 4,
+  gridRight = 8,
 }: FileProps): JSX.Element => {
   return (
     <Form.Group as={Row} className="mb-3">
-      <Form.Label column sm={GRID_LEFT}>
+      <Form.Label column sm={gridLeft}>
         {label}
       </Form.Label>
-      <Col sm={GRID_RIGHT}>
+      <Col sm={gridRight}>
         <input
           id={id}
           type="file"
@@ -192,13 +202,12 @@ export const FileField = ({
 export const SubmitButton = ({
   id,
   name,
-}: {
-  id?: string;
-  name: string;
-}): JSX.Element => {
+  gridLeft = 4,
+  gridRight = 8,
+}: SubmitButtonProps): JSX.Element => {
   return (
     <div className="mb-3 row">
-      <Col sm={{ span: GRID_RIGHT, offset: GRID_LEFT }}>
+      <Col sm={{ span: gridRight, offset: gridLeft }}>
         <Button id={id} type="submit">
           {name}
         </Button>

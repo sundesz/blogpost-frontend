@@ -152,3 +152,7 @@ a {
   margin-bottom: 10px;
   font-weight: 500;
 }
+
+.ck-content.ck-editor__editable_inline {
+  height: 500px;
+}
