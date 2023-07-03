@@ -77,14 +77,16 @@ const BlogForm: React.FC<BlogFormProps> = ({
             name="title"
             placeholder="Title"
             component={InputField}
+            gridLeft="2"
+            gridRight="10"
           />
 
           <Field
-            id="content"
             label="Content"
             name="content"
-            placeholder="Blog content ..."
             component={TextAreaField}
+            gridLeft="2"
+            gridRight="10"
           />
 
           {user.role === 'admin' && (
@@ -95,6 +97,8 @@ const BlogForm: React.FC<BlogFormProps> = ({
               type="checkbox"
               bootstrapClass="form-check checkbox"
               component={InputField}
+              gridLeft="2"
+              gridRight="10"
             />
           )}
 
@@ -106,12 +110,16 @@ const BlogForm: React.FC<BlogFormProps> = ({
               selectOptions={authorOptions}
               component={SelectField}
               disabledValue={user.role !== 'admin'}
+              gridLeft="2"
+              gridRight="10"
             />
           )}
 
           <SubmitButton
             id={`${crudType}-blog-btn`}
             name={capitalize(crudType)}
+            // gridLeft="2"
+            // gridRight="10"
           />
         </Form>
       </Formik>
