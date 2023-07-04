@@ -1,18 +1,13 @@
 import {
-  Api,
-  BaseQueryApi,
   BaseQueryFn,
   createApi,
   fetchBaseQuery,
-  FetchBaseQueryError,
 } from '@reduxjs/toolkit/query/react';
-import { logOut, setCredentials } from '../../feature/auth/authSlice';
-import { RootState } from '../store';
-export const BASE_URL = '/api/v1';
-// const BASE_URL = 'http://localhost:8080/api/v1';
+import { logOut } from '../../feature/auth/authSlice';
+import { BACKEND_BASE_URL } from '../../config';
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: BASE_URL,
+  baseUrl: BACKEND_BASE_URL,
   credentials: 'include',
 });
 
