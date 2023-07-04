@@ -10,6 +10,7 @@ export interface AuthState {
   email: string;
   name: string;
   role: UserRoleType | null;
+  profilePic: string;
 }
 
 const initialState: AuthState = {
@@ -18,6 +19,7 @@ const initialState: AuthState = {
   email: '',
   name: '',
   role: null,
+  profilePic: '',
 };
 
 export interface UnknownError {
@@ -51,6 +53,7 @@ export const refetchSession = createAsyncThunk<
       name: '',
       role: 'user' as UserRoleType,
       isAuthenticated: false,
+      profilePic: '',
     };
   }
 });
@@ -60,13 +63,14 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     setCredentials: (state, action: PayloadAction<LoginResponse>) => {
-      const { userId, email, name, role } = action.payload;
+      const { userId, email, name, role, profilePic } = action.payload;
 
       state.isAuthenticated = true;
       state.userId = userId;
       state.email = email;
       state.name = name;
       state.role = role as UserRoleType;
+      state.profilePic = profilePic;
     },
 
     logOut: (state) => {
@@ -77,12 +81,14 @@ const authSlice = createSlice({
     builder.addCase(
       refetchSession.fulfilled,
       (state: AuthState, action: PayloadAction<LoginResponse>) => {
-        const { isAuthenticated, userId, name, email, role } = action.payload;
+        const { isAuthenticated, userId, name, email, role, profilePic } =
+          action.payload;
         state.isAuthenticated = isAuthenticated!;
         state.userId = userId;
         state.email = email;
         state.name = name;
         state.role = role as UserRoleType;
+        state.profilePic = profilePic;
       }
     );
   },
@@ -98,4 +104,5 @@ export const selectCurrentUser = (state: RootState) => ({
   name: state.auth.name,
   userId: state.auth.userId,
   role: state.auth.role,
+  profilePic: state.auth.profilePic,
 });
