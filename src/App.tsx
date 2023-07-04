@@ -10,7 +10,6 @@ import SingleBlog from './feature/blogs/SingleBlog';
 import UpdateBlog from './feature/blogs/UpdateBlog';
 import Home from './feature/home/Home';
 import SignUp from './feature/signup/SignUp';
-import 'react-toastify/dist/ReactToastify.css';
 import RequireNoAuth from './feature/auth/RequireNoAuth';
 import SingleAuthor from './feature/authors/SingleAuthor';
 import CreateComment from './feature/comment/CreateComment';
@@ -18,6 +17,7 @@ import SingleUser from './feature/user/SingleUser';
 import SingleComment from './feature/comment/SingleComment';
 import Authors from './feature/authors';
 import Blogs from './feature/blogs';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   return (
@@ -33,7 +33,7 @@ const App = () => {
           <Route index element={<Home />} />
           <Route path="blogs">
             <Route index element={<Blogs />} />
-            <Route path=":blogSlug" element={<SingleBlog />} />
+            <Route path=":slug" element={<SingleBlog />} />
           </Route>
 
           <Route path="authors">
@@ -56,7 +56,7 @@ const App = () => {
           <Route element={<RequireAuth />}>
             <Route path="blogs">
               <Route path="new" element={<CreateBlog />} />
-              <Route path="update/:blogSlug" element={<UpdateBlog />} />
+              <Route path="update/:slug" element={<UpdateBlog />} />
             </Route>
             <Route path="/signout" element={<Logout />} />
           </Route>
