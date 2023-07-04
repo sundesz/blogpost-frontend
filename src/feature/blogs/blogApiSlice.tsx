@@ -50,8 +50,7 @@ export const blogApiSlice = apiSlice.injectEndpoints({
           rating4: rating4 ?? 0,
           rating5: rating5 ?? 0,
         };
-
-        return { ...(blog as Blog), reaction, blogRating };
+        return { ...blog, reaction, blogRating };
       },
 
       providesTags: ['Blog'],
