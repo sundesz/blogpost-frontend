@@ -53,7 +53,7 @@ const BlogForm: React.FC<BlogFormProps> = ({
     slug: '',
     content: crudType === 'update' ? blog!.content : '',
     published: crudType === 'update' ? blog!.published : true,
-    author: crudType === 'update' ? blog!.user.userId : user.userId,
+    author: crudType === 'update' ? blog!.User.userId : user.userId,
   };
 
   const authorOptions = authors.map((author) => ({
