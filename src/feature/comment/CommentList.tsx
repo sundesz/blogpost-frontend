@@ -7,7 +7,7 @@ interface CommentListProps {
 }
 
 const CommentList: React.FC<CommentListProps> = ({ blog }) => {
-  const comments = blog.comments;
+  const comments = blog.Comments;
 
   return (
     <div className="comment-list py-4">

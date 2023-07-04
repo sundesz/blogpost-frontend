@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { Field, Form, Formik, useFormikContext } from 'formik';
+import { Field, Form, Formik } from 'formik';
 import { NewUser, UserRole } from '../../types';
 import {
   SubmitButton,
@@ -7,9 +7,9 @@ import {
   SelectField,
   capitalize,
   FileField,
-  SUPPORTED_IMAGE_FORMATS,
 } from '../../utils';
 import PageTitle from '../../components/PageTitle';
+import { SUPPORTED_IMAGE_FORMATS } from '../../config';
 
 interface SignUpFormProps {
   onSubmit: (values: NewUser) => void;
