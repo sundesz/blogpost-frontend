@@ -9,8 +9,7 @@ import {
 } from '../types/formHelper';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-
-export const SUPPORTED_IMAGE_FORMATS = ['image/jpg', 'image/jpeg', 'image/png'];
+import { BLOG_IMAGE_UPLOAD_URL } from '../config';
 
 /**
  * Input type custom
@@ -75,6 +74,7 @@ export const InputField = ({
 
 /**
  * Input type "text area"
+ * TODO:: change this function name as it only fits for blog content
  */
 export const TextAreaField = ({
   field,
@@ -94,8 +94,13 @@ export const TextAreaField = ({
               editor={ClassicEditor}
               data={field.value}
               onChange={(event: any, editor: ClassicEditor) => {
-                const data = editor.getData();
-                form.setFieldValue(field.name, data);
+                form.setFieldValue(field.name, editor.getData());
+              }}
+              config={{
+                // CKEditor configuration options go here
+                ckfinder: {
+                  uploadUrl: `${BLOG_IMAGE_UPLOAD_URL}`,
+                },
               }}
             />
           )}
