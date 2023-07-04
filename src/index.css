@@ -13,9 +13,9 @@
   justify-content: center;
   align-items: center;
 }
-.right-side-link .nav-link .link-description {
+/* .right-side-link .nav-link .link-description {
   font-size: 12px;
-}
+} */
 
 .nav-link:hover,
 .nav-link:focus {
@@ -155,4 +155,15 @@ a {
 
 .ck-content.ck-editor__editable_inline {
   height: 500px;
+}
+
+.welcome-image {
+  border-radius: 50%;
+  width: 65px;
+}
+
+.username.navbar-text {
+  display: flex;
+  gap: 10px;
+  align-items: end;
 }
