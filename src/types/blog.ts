@@ -7,6 +7,7 @@ export interface BlogResponse {
   title: string;
   content: string;
   slug: string;
+  published: boolean;
   updatedAt?: string;
   thumbsUp?: number;
   wow?: number;
@@ -16,8 +17,8 @@ export interface BlogResponse {
   rating3: number;
   rating4: number;
   rating5: number;
-  user: Author;
-  comments: Comment[];
+  User: Author;
+  Comments: Comment[];
 }
 
 export interface Blog {
@@ -27,9 +28,9 @@ export interface Blog {
   slug: string;
   published: boolean;
   updatedAt?: string;
-  user: Author;
+  User: Author;
   reaction: Reaction;
-  comments: Comment[];
+  Comments: Comment[];
   blogRating: BlogRatingAttributes;
 }
 
