@@ -3,9 +3,27 @@ import { Container, Nav, Navbar } from 'react-bootstrap';
 import { Person, PersonPlus, PersonDash } from 'react-bootstrap-icons';
 import { useAppSelector } from '../../hooks/reduxToolkit';
 import { selectCurrentUser } from '../../feature/auth/authSlice';
+import { BACKEND_BASE_URL } from '../../config';
 
 const Navigation: React.FC = (): JSX.Element => {
   const user = useAppSelector(selectCurrentUser);
+
+  const userInfo = (
+    <>
+      {user.profilePic && (
+        <img
+          src={`${process.env.VITE_BACKEND_URL}/${user.profilePic}`}
+          alt={`Welcome ${user.email}`}
+          title={`Welcome ${user.email}`}
+          className="welcome-image"
+        />
+      )}
+      <div>
+        <div>Welcome</div>
+        <div className="font-weight-bold">{user.email}</div>
+      </div>
+    </>
+  );
 
   return (
     <Navbar bg="dark" variant="dark">
@@ -37,10 +55,7 @@ const Navigation: React.FC = (): JSX.Element => {
           {user.isAuthenticate ? (
             <>
               <Nav>
-                <Navbar.Text className="px-3">
-                  <div>Welcome</div>
-                  <div className="font-weight-bold">{user.email}</div>
-                </Navbar.Text>
+                <Navbar.Text className="px-3 username">{userInfo}</Navbar.Text>
                 <Nav.Link
                   id="signout-link"
                   as={Link}
