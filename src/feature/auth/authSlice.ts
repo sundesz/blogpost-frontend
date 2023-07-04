@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { LoginResponse, UserRoleType } from '../../types';
-import { BASE_URL } from '../../app/api/apiSlice';
+import { BACKEND_BASE_URL } from '../../config';
 
 export interface AuthState {
   isAuthenticated: boolean;
@@ -29,7 +29,7 @@ export const refetchSession = createAsyncThunk<
   undefined,
   { rejectValue: UnknownError }
 >('auth/session', async (_, thunkApi) => {
-  const response = await fetch(`${BASE_URL}/session`);
+  const response = await fetch(`${BACKEND_BASE_URL}/session`);
 
   if (response.status !== 200) {
     return thunkApi.rejectWithValue({
