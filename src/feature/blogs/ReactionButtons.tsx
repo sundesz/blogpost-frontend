@@ -21,7 +21,8 @@ const ReactionButtons = ({ blog, isOwnBlog }: ReactionButtonsProps) => {
       await updateReaction({
         blogId: blog.blogId,
         reactionType,
-      });
+      }).unwrap();
+
       toast.success(`${reactionEmoji[reactionType]} reacted successfully.`);
     } catch (error) {
       ErrorNotification(error, message.FAILED.REACTION);
