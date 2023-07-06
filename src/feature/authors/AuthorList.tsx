@@ -27,7 +27,7 @@ const AuthorList = ({ authors }: AuthorListProps) => {
               <Card.Body>{author.email}</Card.Body>
               <Card.Footer>
                 <Link to={`/authors/${author.userId}`}>
-                  {author.blogs ? author.blogs.length : 0} blog(s)
+                  {author.Blogs ? author.Blogs.length : 0} blog(s)
                 </Link>
               </Card.Footer>
             </Card.Body>
