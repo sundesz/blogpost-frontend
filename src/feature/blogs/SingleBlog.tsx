@@ -53,12 +53,10 @@ const SingleBlog: React.FC = () => {
       <div className="lead mb-4">{parse(blog.content)}</div>
       <div className="author-misc my-5">
         <div className="author-name">
-          by
-          <b>
-            <i>
-              <Link to={`/authors/${blog.User.userId}`}>{blog.User.name}</Link>
-            </i>
-          </b>
+          by &nbsp;
+          <Link to={`/authors/${blog.User.userId}`} className="by-author">
+            {blog.User.name}
+          </Link>
         </div>
         <div className="blog-date">
           updated {formatDistanceToNow(parseISO(blog.updatedAt!))} ago
