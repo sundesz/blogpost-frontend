@@ -48,6 +48,7 @@ const Authors = () => {
 
   const filterOptions = {
     name: 'Name',
+    email: 'Email',
   };
 
   return (
