@@ -9,7 +9,7 @@ export interface LoginResponse {
   name: string;
   role: string;
   isAuthenticated?: boolean;
-  profilePic: string;
+  profilePic: string | null;
 }
 
 export * from './author';

@@ -18,5 +18,5 @@ export interface User {
   userId: string;
   name: string;
   email: string;
-  profilePic: string;
+  profilePic: string | null;
 }

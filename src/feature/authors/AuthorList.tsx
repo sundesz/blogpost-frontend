@@ -12,9 +12,9 @@ const AuthorList = ({ authors }: AuthorListProps) => {
       {authors && authors.length ? (
         authors.map((author) => (
           <Card key={author.userId}>
-            {author.imageId && (
+            {author.profilePic && (
               <img
-                src={`http://localhost:8080/images/profile_pictures/${author.userId}.png`}
+                src={author.profilePic}
                 alt={author.name}
                 title={author.name}
               />

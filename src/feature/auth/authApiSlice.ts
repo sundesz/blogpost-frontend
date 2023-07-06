@@ -9,6 +9,14 @@ export const authApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
         body: { ...credentials },
       }),
+
+      transformResponse: (responseData: LoginResponse) => {
+        const profilePic = responseData.profilePic
+          ? `${process.env.VITE_BACKEND_URL}/images/profile_pictures/${responseData.profilePic}.png`
+          : null;
+
+        return { ...responseData, profilePic };
+      },
     }),
 
     logout: builder.mutation<void, void>({

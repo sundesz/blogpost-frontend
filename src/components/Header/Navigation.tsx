@@ -3,7 +3,6 @@ import { Container, Nav, Navbar } from 'react-bootstrap';
 import { Person, PersonPlus, PersonDash } from 'react-bootstrap-icons';
 import { useAppSelector } from '../../hooks/reduxToolkit';
 import { selectCurrentUser } from '../../feature/auth/authSlice';
-import { BACKEND_BASE_URL } from '../../config';
 
 const Navigation: React.FC = (): JSX.Element => {
   const user = useAppSelector(selectCurrentUser);
@@ -12,7 +11,7 @@ const Navigation: React.FC = (): JSX.Element => {
     <>
       {user.profilePic && (
         <img
-          src={`${process.env.VITE_BACKEND_URL}/${user.profilePic}`}
+          src={user.profilePic}
           alt={`Welcome ${user.email}`}
           title={`Welcome ${user.email}`}
           className="welcome-image"

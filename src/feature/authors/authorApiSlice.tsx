@@ -32,6 +32,21 @@ export const authorApiSlice = apiSlice.injectEndpoints({
         query: ({ page, orderBy, orderDir, filterName, filterValue }) => ({
           url: `authors?page=${page}&orderBy=${orderBy}&orderDir=${orderDir}&columnName=${filterName}&columnValue=${filterValue}`,
         }),
+        transformResponse: (responseData: PaginationResponse<Author>) => {
+          const { data, ...rest } = responseData;
+          const dataWithProfilePic: Author[] = data.map((author) => {
+            const profilePic = author.imageId
+              ? `${process.env.VITE_BACKEND_URL}/images/profile_pictures/${author.userId}.png`
+              : null;
+
+            return {
+              ...author,
+              profilePic,
+            };
+          });
+
+          return { ...rest, data: dataWithProfilePic };
+        },
         providesTags: ['Authors'],
       }
     ),
