@@ -30,7 +30,7 @@ const SingleAuthor = () => {
 
       <div></div>
       <div className="blog-container py-5 container">
-        {author?.blogs?.map((blog) => (
+        {author?.Blogs?.map((blog) => (
           <ShortBlog key={blog.blogId} blog={blog} />
         ))}
       </div>
