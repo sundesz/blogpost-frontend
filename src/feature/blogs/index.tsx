@@ -49,6 +49,7 @@ const Blogs = () => {
 
   const filterOptions = {
     title: 'Title',
+    content: 'Content',
   };
 
   return (
