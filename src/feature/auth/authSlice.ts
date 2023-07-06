@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { LoginResponse, UserRoleType } from '../../types';
-import { BACKEND_BASE_URL } from '../../config';
+import { BACKEND_BASE_URL, PROFILE_IMAGE } from '../../config';
 
 export interface AuthState {
   isAuthenticated: boolean;
@@ -10,7 +10,7 @@ export interface AuthState {
   email: string;
   name: string;
   role: UserRoleType | null;
-  profilePic: string;
+  profilePic: string | null;
 }
 
 const initialState: AuthState = {
@@ -45,7 +45,15 @@ export const refetchSession = createAsyncThunk<
   };
 
   if (sessionData.status) {
-    return { ...sessionData.data, isAuthenticated: true };
+    const profilePic = sessionData.data.profilePic
+      ? `${PROFILE_IMAGE}/${sessionData.data.profilePic}.png`
+      : null;
+
+    return {
+      ...sessionData.data,
+      isAuthenticated: true,
+      profilePic,
+    };
   } else {
     return {
       userId: '',
