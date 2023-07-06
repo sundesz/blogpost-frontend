@@ -128,6 +128,3 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
 };
 
 export default SignUpForm;
-function setFieldValue(arg0: string, file: File) {
-  throw new Error('Function not implemented.');
-}
