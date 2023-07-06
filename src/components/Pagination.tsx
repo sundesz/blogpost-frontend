@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import { useSearchQuery } from '../../hooks/useSearchQuery';
-import { PageType } from '../../types';
-import { generatePagination } from '../../utils';
+import { useSearchQuery } from '../hooks/useSearchQuery';
+import { PageType } from '../types';
+import { generatePagination } from '../utils';
 
 interface IAppPaginationProps {
   pageType: PageType;
