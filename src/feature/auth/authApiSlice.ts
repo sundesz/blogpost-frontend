@@ -1,4 +1,5 @@
 import { apiSlice } from '../../app/api/apiSlice';
+import { PROFILE_IMAGE } from '../../config';
 import { LoginAttributes, LoginResponse } from '../../types';
 
 export const authApiSlice = apiSlice.injectEndpoints({
@@ -12,7 +13,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
 
       transformResponse: (responseData: LoginResponse) => {
         const profilePic = responseData.profilePic
-          ? `${process.env.VITE_BACKEND_URL}/images/profile_pictures/${responseData.profilePic}.png`
+          ? `${PROFILE_IMAGE}/${responseData.profilePic}.png`
           : null;
 
         return { ...responseData, profilePic };

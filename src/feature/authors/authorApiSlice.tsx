@@ -1,4 +1,5 @@
 import { apiSlice } from '../../app/api/apiSlice';
+import { PROFILE_IMAGE } from '../../config';
 import {
   Author,
   AuthorNames,
@@ -36,7 +37,7 @@ export const authorApiSlice = apiSlice.injectEndpoints({
           const { data, ...rest } = responseData;
           const dataWithProfilePic: Author[] = data.map((author) => {
             const profilePic = author.imageId
-              ? `${process.env.VITE_BACKEND_URL}/images/profile_pictures/${author.userId}.png`
+              ? `${PROFILE_IMAGE}/${author.userId}.png`
               : null;
 
             return {
