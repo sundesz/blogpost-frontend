@@ -1,4 +1,4 @@
-import { format } from 'date-fns';
+import { formatDistanceToNow, parseISO } from 'date-fns';
 import { Link } from 'react-router-dom';
 import parse from 'html-react-parser';
 import { Comment } from '../../types';
@@ -23,7 +23,7 @@ const SingleComment: React.FC<SingleCommentProps> = ({ comment }) => {
         <div>
           <span className="commenter">{commenter}</span>&nbsp;&nbsp;
           <span className="comment-date">
-            commented on {format(new Date(comment.updatedAt!), 'dd LLLL yyyy')}
+            commented on {formatDistanceToNow(parseISO(comment.updatedAt!))} ago
           </span>
         </div>
         <div className="comment-heading">
