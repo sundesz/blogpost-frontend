@@ -1,21 +1,18 @@
 import { useState } from 'react';
-import AppPagination from '../Pagination';
+import AppPagination from '../../components/Pagination';
 import { useGetAllAuthorQuery } from './authorApiSlice';
 import Loading from '../../components/Loading';
 import ErrorPage from '../../components/ErrorPage';
 import AuthorList from './AuthorList';
 import { Container } from 'react-bootstrap';
 import { useSearchQuery } from '../../hooks/useSearchQuery';
-import Filter from '../Filter';
+import Filter from '../../components/Filter';
 
 const Authors = () => {
   const { pageNumber, filterName, filterValue, orderBy, orderDir } =
     useSearchQuery({});
-
   const PAGE_TYPE = 'authors';
   const [page, setPage] = useState<number>(Number(pageNumber));
-  const [filterColumn, setFilterColumn] = useState<string>(filterName);
-  const [filterText, setFilterText] = useState<string>(filterValue);
 
   const {
     data: authorData,
@@ -24,7 +21,7 @@ const Authors = () => {
     error,
   } = useGetAllAuthorQuery({
     page,
-    filterName: filterColumn,
+    filterName,
     filterValue,
     orderBy,
     orderDir,
@@ -42,25 +39,38 @@ const Authors = () => {
     return <div>No data </div>;
   }
 
+  const orderOptions = {
+    updated_at_desc: 'Latest',
+    updated_at_asc: 'Oldest',
+    name_desc: 'Name Desc',
+    name_asc: 'Name Asc',
+  };
+
+  const filterOptions = {
+    name: 'Name',
+  };
+
   return (
     <Container className="py-5">
       <div className="page-header">Authors</div>
 
       <Filter
         pageType={PAGE_TYPE}
-        filterText={filterText}
-        filterColumn={filterColumn}
-        setFilterColumn={setFilterColumn}
-        setFilterText={setFilterText}
+        filterText={filterValue}
+        filterColumn={filterName}
         setPage={setPage}
+        orderBy={orderBy}
+        orderDir={orderDir}
+        orderOptions={orderOptions}
+        filterOptions={filterOptions}
       />
 
-      <AppPagination
+      {/* <AppPagination
         pageType={PAGE_TYPE}
         totalPage={authorData.totalPage}
         currentPage={authorData.currentPage}
         setPage={setPage}
-      />
+      /> */}
 
       <AuthorList authors={authorData.data} />
 

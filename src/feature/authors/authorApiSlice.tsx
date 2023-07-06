@@ -30,7 +30,7 @@ export const authorApiSlice = apiSlice.injectEndpoints({
     getAllAuthor: builder.query<PaginationResponse<Author>, GetAllRequestQuery>(
       {
         query: ({ page, orderBy, orderDir, filterName, filterValue }) => ({
-          url: `authors?page=${page}&orderBy=${orderBy}&orderDir=${orderDir}&name=${filterName}&value=${filterValue}`,
+          url: `authors?page=${page}&orderBy=${orderBy}&orderDir=${orderDir}&columnName=${filterName}&columnValue=${filterValue}`,
         }),
         providesTags: ['Authors'],
       }
