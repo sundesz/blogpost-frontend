@@ -14,7 +14,7 @@ export const blogApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAllBlog: builder.query<PaginationResponse<Blog>, GetAllRequestQuery>({
       query: ({ page, orderBy, orderDir, filterName, filterValue }) => ({
-        url: `blogs?page=${page}&orderBy=${orderBy}&orderDir=${orderDir}&name=${filterName}&value=${filterValue}`,
+        url: `blogs?page=${page}&orderBy=${orderBy}&orderDir=${orderDir}&columnName=${filterName}&columnValue=${filterValue}`,
       }),
       providesTags: ['Blogs'],
     }),

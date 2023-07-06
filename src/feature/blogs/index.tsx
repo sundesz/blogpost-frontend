@@ -4,8 +4,8 @@ import Loading from '../../components/Loading';
 import { useGetAllBlogQuery } from './blogApiSlice';
 import { useSearchQuery } from '../../hooks/useSearchQuery';
 import { useState } from 'react';
-import Filter from '../Filter';
-import AppPagination from '../Pagination';
+import Filter from '../../components/Filter';
+import AppPagination from '../../components/Pagination';
 import BlogList from './BlogList';
 
 const Blogs = () => {
@@ -14,8 +14,6 @@ const Blogs = () => {
 
   const PAGE_TYPE = 'blogs';
   const [page, setPage] = useState<number>(Number(pageNumber));
-  const [filterColumn, setFilterColumn] = useState<string>(filterName);
-  const [filterText, setFilterText] = useState<string>(filterValue);
 
   const {
     data: blogData,
@@ -24,7 +22,7 @@ const Blogs = () => {
     error,
   } = useGetAllBlogQuery({
     page,
-    filterName: filterColumn,
+    filterName,
     filterValue,
     orderBy,
     orderDir,
@@ -42,25 +40,38 @@ const Blogs = () => {
     return <div>No data </div>;
   }
 
+  const orderOptions = {
+    updated_at_desc: 'Latest',
+    updated_at_asc: 'Oldest',
+    title_desc: 'Title Desc',
+    title_asc: 'Title Asc',
+  };
+
+  const filterOptions = {
+    title: 'Title',
+  };
+
   return (
     <Container className="py-5">
       <div className="page-header">Blogs</div>
 
       <Filter
         pageType={PAGE_TYPE}
-        filterText={filterText}
-        filterColumn={filterColumn}
-        setFilterColumn={setFilterColumn}
-        setFilterText={setFilterText}
+        filterText={filterValue}
+        filterColumn={filterName}
         setPage={setPage}
+        orderBy={orderBy}
+        orderDir={orderDir}
+        orderOptions={orderOptions}
+        filterOptions={filterOptions}
       />
 
-      <AppPagination
+      {/* <AppPagination
         pageType={PAGE_TYPE}
         totalPage={blogData.totalPage}
         currentPage={blogData.currentPage}
         setPage={setPage}
-      />
+      /> */}
 
       <BlogList blogs={blogData.data} />
 
