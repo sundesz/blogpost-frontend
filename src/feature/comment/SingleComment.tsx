@@ -1,5 +1,6 @@
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
+import parse from 'html-react-parser';
 import { Comment } from '../../types';
 import Rating from './Rating';
 
@@ -19,22 +20,19 @@ const SingleComment: React.FC<SingleCommentProps> = ({ comment }) => {
   return (
     <div className="comment py-2">
       <div>
-        <div className="commenter">{commenter}</div>
+        <div>
+          <span className="commenter">{commenter}</span>&nbsp;&nbsp;
+          <span className="comment-date">
+            commented on {format(new Date(comment.updatedAt!), 'dd LLLL yyyy')}
+          </span>
+        </div>
         <div className="comment-heading">
           <Rating rating={comment.rating?.rating} />
-          <div className="comment-title">
-            {comment.title}
-            {/* <Link to={`/comments/${comment.commentId}`} state={{ comment }}>
-              {comment.title}
-            </Link> */}
-          </div>
-        </div>
-        <div className="comment-date">
-          commented on {format(new Date(comment.updatedAt!), 'dd LLLL yyyy')}
+          <div className="comment-title">{comment.title}</div>
         </div>
       </div>
 
-      <div className="comment-content">{comment.content}</div>
+      <div className="comment-content">{parse(comment.content)}</div>
     </div>
   );
 };
