@@ -107,10 +107,19 @@
 .comment {
   font-size: 0.9rem;
 }
+.comment-date {
+  font-style: italic;
+}
 
 .user-name,
 .commenter {
   text-transform: capitalize;
+  font-weight: bold;
+}
+
+.by-author {
+  font-weight: bold;
+  font-style: italic;
 }
 
 .comment-heading {
