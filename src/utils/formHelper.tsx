@@ -73,17 +73,95 @@ export const InputField = ({
 };
 
 /**
- * Input type "text area"
- * TODO:: change this function name as it only fits for blog content
+ * Text area
  */
 export const TextAreaField = ({
+  id,
+  field,
+  placeholder,
+  label,
+  rows = 15,
+  gridLeft = 4,
+  gridRight = 8,
+}: TextAreaProps): JSX.Element => {
+  return (
+    <Form.Group as={Row} className="mb-3">
+      <Form.Label column sm={gridLeft}>
+        {label}
+      </Form.Label>
+      <Col sm={gridRight}>
+        <Field
+          id={id}
+          className="form-control"
+          placeholder={placeholder}
+          rows={rows}
+          component="textarea"
+          {...field}
+        />
+
+        <div style={{ color: 'red' }}>
+          <ErrorMessage name={field.name} />
+        </div>
+      </Col>
+    </Form.Group>
+  );
+};
+
+/**
+ * Input type for blog content
+ */
+export const BlogContentField = ({
+  id,
   field,
   label,
   gridLeft = 4,
   gridRight = 8,
 }: TextAreaProps): JSX.Element => {
   return (
-    <Form.Group as={Row} className="mb-3">
+    <Form.Group as={Row} className="mb-3" id={id}>
+      <Form.Label column sm={gridLeft}>
+        {label}
+      </Form.Label>
+      <Col sm={gridRight}>
+        <Field name={field.name}>
+          {({ field, form }: FieldProps) => (
+            <CKEditor
+              editor={ClassicEditor}
+              data={field.value}
+              onChange={(event: any, editor: ClassicEditor) => {
+                // TODO:: check if image is delete and manually trigger the axios to delete image
+                form.setFieldValue(field.name, editor.getData());
+              }}
+              config={{
+                // CKEditor configuration options go here
+                ckfinder: {
+                  uploadUrl: `${BLOG_IMAGE_UPLOAD_URL}`,
+                },
+              }}
+            />
+          )}
+        </Field>
+
+        <div style={{ color: 'red' }}>
+          <ErrorMessage name={field.name} />
+        </div>
+      </Col>
+    </Form.Group>
+  );
+};
+
+/**
+ * Input type for comment content
+ */
+export const CommentField = ({
+  id,
+  field,
+  label,
+  gridLeft = 4,
+  gridRight = 8,
+}: TextAreaProps): JSX.Element => {
+  return (
+    <Form.Group as={Row} className="mb-3" id={id}>
       <Form.Label column sm={gridLeft}>
         {label}
       </Form.Label>
@@ -98,9 +176,15 @@ export const TextAreaField = ({
               }}
               config={{
                 // CKEditor configuration options go here
-                ckfinder: {
-                  uploadUrl: `${BLOG_IMAGE_UPLOAD_URL}`,
-                },
+                toolbar: [
+                  'undo',
+                  'redo',
+                  'bold',
+                  'italic',
+                  'Link',
+                  'numberedList',
+                  'bulletedList',
+                ],
               }}
             />
           )}
