@@ -170,8 +170,11 @@ a {
   font-weight: 500;
 }
 
-.ck-content.ck-editor__editable_inline {
+#blog-content .ck-content.ck-editor__editable_inline {
   height: 500px;
+}
+#comment-content .ck-content.ck-editor__editable_inline {
+  height: 250px;
 }
 
 .welcome-image {
@@ -184,4 +187,9 @@ a {
   display: flex;
   gap: 10px;
   align-items: end;
+}
+
+.search-filter .input-group,
+.search-filter .form-select {
+  flex: 1;
 }
