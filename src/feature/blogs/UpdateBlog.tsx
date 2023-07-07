@@ -5,7 +5,7 @@ import { useUpdateBlogMutation } from './blogApiSlice';
 import { Blog, CreateUpdateBlogParams } from '../../types';
 import Loading from '../../components/Loading';
 import BlogForm from './BlogForm';
-import { useGetAllAuthorQuery } from '../authors/authorApiSlice';
+import { useGetAuthorNamesQuery } from '../authors/authorApiSlice';
 import slugify from 'slugify';
 import { slugifyOptions } from '../../config';
 import ErrorPage from '../../components/ErrorPage';
@@ -14,7 +14,7 @@ import { message } from '../../utils/notificationMessage';
 
 const UpdateBlog: React.FC = () => {
   const navigate = useNavigate();
-  const { data: authors, isLoading, isError, error } = useGetAllAuthorQuery();
+  const { data: authors, isLoading, isError, error } = useGetAuthorNamesQuery();
   const [updateBlog] = useUpdateBlogMutation();
 
   let { state } = useLocation() as { state: { blog: Blog } };
