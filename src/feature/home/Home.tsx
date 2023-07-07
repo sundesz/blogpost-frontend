@@ -1,7 +1,6 @@
 import { Container } from 'react-bootstrap';
 import { selectCurrentUser } from '../../feature/auth/authSlice';
 import { useAppSelector } from '../../hooks/reduxToolkit';
-import Blogs from '../blogs';
 
 const Home = () => {
   const user = useAppSelector(selectCurrentUser);
@@ -27,8 +26,6 @@ const Home = () => {
           </div>
         </Container>
       </section>
-
-      <Blogs />
     </>
   );
 };
