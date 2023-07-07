@@ -13,9 +13,9 @@ import Page404 from '../../components/Page404';
 import {
   SubmitButton,
   InputField,
-  TextAreaField,
   SelectField,
   capitalize,
+  BlogContentField,
 } from '../../utils';
 import PageTitle from '../../components/PageTitle';
 
@@ -61,6 +61,10 @@ const BlogForm: React.FC<BlogFormProps> = ({
     value: author.userId,
   }));
 
+  const isAdmin = user.role === 'admin';
+  const isOwnBlog = crudType === 'update' && blog!.User.email === user.email;
+  const hasPermission = isAdmin ? true : isOwnBlog ? true : false;
+
   return (
     <div>
       <PageTitle title={`${capitalize(crudType)} blog`} />
@@ -82,14 +86,15 @@ const BlogForm: React.FC<BlogFormProps> = ({
           />
 
           <Field
+            id="blog-content"
             label="Content"
             name="content"
-            component={TextAreaField}
+            component={BlogContentField}
             gridLeft="2"
             gridRight="10"
           />
 
-          {user.role === 'admin' && (
+          {hasPermission && (
             <Field
               id="published"
               label="Published"
@@ -102,14 +107,14 @@ const BlogForm: React.FC<BlogFormProps> = ({
             />
           )}
 
-          {user.role === 'admin' && (
+          {hasPermission && (
             <Field
               name="author"
               id="author"
               label="Author"
               selectOptions={authorOptions}
               component={SelectField}
-              disabledValue={user.role !== 'admin'}
+              disabledValue={!hasPermission}
               gridLeft="2"
               gridRight="10"
             />
@@ -118,8 +123,8 @@ const BlogForm: React.FC<BlogFormProps> = ({
           <SubmitButton
             id={`${crudType}-blog-btn`}
             name={capitalize(crudType)}
-            // gridLeft="2"
-            // gridRight="10"
+            gridLeft={2}
+            gridRight={10}
           />
         </Form>
       </Formik>

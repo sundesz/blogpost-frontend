@@ -3,8 +3,8 @@ import { Field, Form, Formik } from 'formik';
 import {
   SubmitButton,
   InputField,
-  TextAreaField,
   SelectField,
+  CommentField,
 } from '../../utils';
 import { CreateUpdateCommentParams } from '../../types';
 
@@ -57,11 +57,11 @@ const CommentForm: React.FC<CommentFormProps> = ({ blogId, onSubmit }) => {
           />
 
           <Field
-            id="content"
+            id="comment-content"
             label="Content"
             name="content"
             placeholder="Comment ..."
-            component={TextAreaField}
+            component={CommentField}
             rows="5"
           />
 
