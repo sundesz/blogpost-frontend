@@ -24,6 +24,7 @@ const SignUp: React.FC = () => {
       formData.append('password', newUserData.password);
       formData.append('role', newUserData.role);
 
+      // If you need to access the error or success payload immediately after a mutation, you can chain .unwrap().
       await createUser(formData).unwrap();
       toast.success(message.SUCCESS.CREATE_USER);
 
