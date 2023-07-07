@@ -10,7 +10,7 @@ interface BlogProps {
 
 const ShortBlog: React.FC<BlogProps> = ({ blog }) => {
   return (
-    <Card>
+    <Card className={blog.published ? '' : 'bg-warning'}>
       <Card.Body>
         <Card.Title>
           <Link to={`/blogs/${blog.slug}`}>{blog.title}</Link>

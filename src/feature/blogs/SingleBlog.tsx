@@ -41,9 +41,10 @@ const SingleBlog: React.FC = () => {
     (user.role === 'admin' || blog.User.userId === user.userId);
 
   const isOwnBlog = user.userId === blog.User.userId;
+  const unPublishedClass = blog.published ? '' : 'bg-warning';
 
   return (
-    <Container className="content-container py-5">
+    <Container className={`content-container py-5 ${unPublishedClass}`}>
       <PageTitle
         title={capitalize(blog.title)}
         divClass="mb-2"
