@@ -3,6 +3,7 @@ import { User } from './user';
 
 export type Author = User & {
   Blogs?: Blog[];
+  blogCount?: number;
   imageId: string;
 };
 
