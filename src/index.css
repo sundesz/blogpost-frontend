@@ -1,3 +1,8 @@
+:root {
+  --background-color: #8eac50;
+  --card-color: #cde990;
+}
+
 #app-name {
   font-weight: bold;
 }
@@ -40,7 +45,10 @@
 
 .author-container .card,
 .blog-container .card {
+  background-color: var(--card-color);
   width: 25rem;
+}
+.author-container .card {
   flex-direction: row;
   align-items: center;
 }
@@ -49,6 +57,13 @@
 .blog-container .card img {
   max-height: 100px;
   padding-left: 15px;
+}
+
+.blog-container .card img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  padding: 0;
 }
 
 .blog-container .card a {
@@ -179,7 +194,7 @@ a {
 
 .welcome-image {
   border-radius: 50%;
-  width: 65px;
+  width: 55px;
   height: 55px;
 }
 
@@ -192,4 +207,13 @@ a {
 .search-filter .input-group,
 .search-filter .form-select {
   flex: 1;
+}
+
+footer,
+.background-color {
+  background-color: var(--background-color);
+}
+
+.card-title {
+  text-transform: capitalize;
 }
