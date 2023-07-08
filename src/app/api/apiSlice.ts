@@ -14,12 +14,20 @@ const baseQuery = fetchBaseQuery({
 const baseQueryWithReauth: BaseQueryFn = async (args, api, extraOptions) => {
   // `api` has the type `BaseQueryApi` (not configurable)
 
-  // logout if session is expired
-  const sessionResult = await baseQuery('/session', api, extraOptions);
+  try {
+    // logout if session is expired
+    const sessionResult = await baseQuery('/session', api, extraOptions);
 
-  const result = sessionResult.data as { status: boolean };
-  if (!result.status) {
-    api.dispatch(logOut());
+    if (sessionResult.hasOwnProperty('error')) {
+      throw new Error(String(sessionResult.error?.status));
+    } else {
+      const result = sessionResult.data as { status: boolean };
+      if (!result.status) {
+        api.dispatch(logOut());
+      }
+    }
+  } catch (error) {
+    console.error(error);
   }
 
   return await baseQuery(args, api, extraOptions);
