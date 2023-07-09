@@ -1,13 +1,7 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 /// <reference types="cypress" />
 
-interface SignUp {
-  name: string;
-  email: string;
-  role: string;
-  password: string;
-  confirmPassword: string;
-}
+import { SignUp } from '../e2e/blogpost.cy';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 declare namespace Cypress {
