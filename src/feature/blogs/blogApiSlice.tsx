@@ -1,4 +1,5 @@
 import { apiSlice } from '../../app/api/apiSlice';
+import { PROFILE_IMAGE } from '../../config';
 import {
   Blog,
   BlogRatingAttributes,
@@ -16,6 +17,19 @@ export const blogApiSlice = apiSlice.injectEndpoints({
       query: ({ page, orderBy, orderDir, filterName, filterValue }) => ({
         url: `blogs?page=${page}&orderBy=${orderBy}&orderDir=${orderDir}&columnName=${filterName}&columnValue=${filterValue}`,
       }),
+      transformResponse: (responseData: PaginationResponse<Blog>) => {
+        const { data, ...rest } = responseData;
+        const dataWithProfilePic: Blog[] = data.map((blog) => {
+          const profilePic = blog.User.imageId
+            ? `${PROFILE_IMAGE}/${blog.User.userId}.png`
+            : null;
+
+          const { User, ...restBlog } = blog;
+          return { ...restBlog, User: { ...User, profilePic } };
+        });
+
+        return { ...rest, data: dataWithProfilePic };
+      },
       providesTags: ['Blogs'],
     }),
 

@@ -14,6 +14,13 @@ export const authorApiSlice = apiSlice.injectEndpoints({
      */
     getAuthor: builder.query<Author, string>({
       query: (authorId) => `/authors/${authorId}`,
+      transformResponse: (responseData: Author) => {
+        const profilePic = responseData.imageId
+          ? `${PROFILE_IMAGE}/${responseData.userId}.png`
+          : null;
+
+        return { ...responseData, profilePic };
+      },
       providesTags: ['Author'],
     }),
 
