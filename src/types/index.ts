@@ -1,3 +1,5 @@
+import { UserRoleType } from './user';
+
 export interface LoginAttributes {
   username: string;
   password: string;
@@ -7,7 +9,7 @@ export interface LoginResponse {
   userId: string;
   email: string;
   name: string;
-  role: string;
+  role: UserRoleType;
   isAuthenticated?: boolean;
   profilePic: string | null;
 }

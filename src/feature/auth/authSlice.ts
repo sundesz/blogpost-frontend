@@ -39,10 +39,10 @@ export const refetchSession = createAsyncThunk<
     } as UnknownError);
   }
 
-  const sessionData = (await response.json()) as {
+  const sessionData: {
     status: boolean;
     data: LoginResponse;
-  };
+  } = await response.json();
 
   if (sessionData.status) {
     const profilePic = sessionData.data.profilePic
@@ -59,7 +59,7 @@ export const refetchSession = createAsyncThunk<
       userId: '',
       email: '',
       name: '',
-      role: 'user' as UserRoleType,
+      role: 'user',
       isAuthenticated: false,
       profilePic: '',
     };
@@ -77,7 +77,7 @@ const authSlice = createSlice({
       state.userId = userId;
       state.email = email;
       state.name = name;
-      state.role = role as UserRoleType;
+      state.role = role;
       state.profilePic = profilePic;
     },
 
@@ -95,7 +95,7 @@ const authSlice = createSlice({
         state.userId = userId;
         state.email = email;
         state.name = name;
-        state.role = role as UserRoleType;
+        state.role = role;
         state.profilePic = profilePic;
       }
     );
