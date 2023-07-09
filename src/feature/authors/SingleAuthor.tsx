@@ -6,6 +6,7 @@ import PageTitle from '../../components/PageTitle';
 import { capitalize } from '../../utils';
 import ShortBlog from '../blogs/ShortBlog';
 import { useGetAuthorQuery } from './authorApiSlice';
+import AuthorImage from '../../components/AuthorImage';
 
 const SingleAuthor = () => {
   const { authorId } = useParams() as { authorId: string };
@@ -20,18 +21,19 @@ const SingleAuthor = () => {
     return <Loading />;
   }
 
-  if (isError) {
+  if (isError || !author) {
     return <ErrorPage error={error} />;
   }
 
   return (
     <Container className="py-5">
-      <PageTitle title={`${capitalize(author?.name!)} (${author?.email})`} />
+      <PageTitle title={capitalize(author.name)} />
 
-      <div></div>
+      <AuthorImage author={author} />
+      <div>{author.email}</div>
       <div className="blog-container py-5 container">
-        {author?.Blogs?.map((blog) => (
-          <ShortBlog key={blog.blogId} blog={blog} />
+        {author.Blogs?.map((blog) => (
+          <ShortBlog key={blog.blogId} blog={blog} isAuthorBlog={true} />
         ))}
       </div>
     </Container>

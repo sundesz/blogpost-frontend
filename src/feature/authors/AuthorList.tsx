@@ -1,6 +1,7 @@
 import { Card, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Author } from '../../types';
+import AuthorImage from '../../components/AuthorImage';
 
 interface AuthorListProps {
   authors: Author[];
@@ -12,13 +13,7 @@ const AuthorList = ({ authors }: AuthorListProps) => {
       {authors && authors.length ? (
         authors.map((author) => (
           <Card key={author.userId}>
-            {author.profilePic && (
-              <img
-                src={author.profilePic}
-                alt={author.name}
-                title={author.name}
-              />
-            )}
+            <AuthorImage author={author} />
 
             <Card.Body>
               <Card.Title>
