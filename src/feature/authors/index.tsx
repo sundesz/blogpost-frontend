@@ -55,16 +55,18 @@ const Authors = () => {
     <Container className="py-5">
       <div className="page-header">Authors</div>
 
-      <Filter
-        pageType={PAGE_TYPE}
-        filterText={filterValue}
-        filterColumn={filterName}
-        setPage={setPage}
-        orderBy={orderBy}
-        orderDir={orderDir}
-        orderOptions={orderOptions}
-        filterOptions={filterOptions}
-      />
+      {authorData.data.length > 0 && (
+        <Filter
+          pageType={PAGE_TYPE}
+          filterText={filterValue}
+          filterColumn={filterName}
+          setPage={setPage}
+          orderBy={orderBy}
+          orderDir={orderDir}
+          orderOptions={orderOptions}
+          filterOptions={filterOptions}
+        />
+      )}
 
       {/* <AppPagination
         pageType={PAGE_TYPE}
