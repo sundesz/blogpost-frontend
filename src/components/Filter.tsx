@@ -5,14 +5,16 @@ import { PageType } from '../types';
 import { useAppSelector } from '../hooks/reduxToolkit';
 import { selectCurrentUser } from '../feature/auth/authSlice';
 
+type SelectOptions = { [key: string]: string };
+
 interface FilterProps {
   pageType: PageType;
   filterText: string;
   filterColumn: string;
   orderBy: string;
   orderDir: string;
-  orderOptions: { [key: string]: string };
-  filterOptions: { [key: string]: string };
+  orderOptions: SelectOptions;
+  filterOptions: SelectOptions;
   setPage: (value: React.SetStateAction<number>) => void;
 }
 
@@ -29,8 +31,8 @@ const Filter = ({
   const navigate = useNavigate();
   const user = useAppSelector(selectCurrentUser);
 
-  const inputRef = useRef<HTMLInputElement>(null);
-  const selectRef = useRef<HTMLSelectElement>(null);
+  const inputFilterRef = useRef<HTMLInputElement>(null);
+  const selectFilterRef = useRef<HTMLSelectElement>(null);
 
   const orderSelectHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const orderValue = e.target.value;
@@ -39,35 +41,30 @@ const Filter = ({
     const orderBy = orderValue.substring(0, lastIndex);
     const orderDir = orderValue.substring(lastIndex + 1);
 
+    const searchColumn = selectFilterRef.current?.value;
+    const searchValue = inputFilterRef.current?.value;
+
     setPage(() => 1);
     navigate({
       pathname: `/${pageType}`,
-      search: `?orderBy=${orderBy}&orderDir=${orderDir}`,
+      search: `?columnName=${searchColumn}&columnValue=${searchValue}&orderBy=${orderBy}&orderDir=${orderDir}`,
     });
   };
 
   const orderValue =
     orderBy && orderDir ? `${orderBy}_${orderDir}` : 'updated_at_desc';
 
-  const renderOrderOption = () => {
+  /**
+   * Render options used for select options
+   * @param options
+   * @returns
+   */
+  const renderOption = (options: SelectOptions) => {
     const result = [];
-    for (const key in orderOptions) {
+    for (const key in options) {
       result.push(
         <option value={key} key={key}>
-          {orderOptions[key]}
-        </option>
-      );
-    }
-
-    return result;
-  };
-
-  const renderFilterOption = () => {
-    const result = [];
-    for (const key in filterOptions) {
-      result.push(
-        <option value={key} key={key}>
-          {filterOptions[key]}
+          {options[key]}
         </option>
       );
     }
@@ -76,11 +73,11 @@ const Filter = ({
   };
 
   const filterSelectHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    if (!inputRef.current || !selectRef.current) {
+    if (!inputFilterRef.current || !selectFilterRef.current) {
       return false;
     }
-    const searchValue = inputRef.current.value;
-    const searchColumn = selectRef.current?.value;
+    const searchValue = inputFilterRef.current.value;
+    const searchColumn = selectFilterRef.current?.value;
 
     if (filterText.trim()) {
       setPage(() => 1);
@@ -94,11 +91,11 @@ const Filter = ({
   const filterInputKeyDownHandler = (
     e: React.KeyboardEvent<HTMLInputElement>
   ) => {
-    if (!inputRef.current || !selectRef.current) {
+    if (!inputFilterRef.current || !selectFilterRef.current) {
       return false;
     }
-    const searchValue = inputRef.current?.value;
-    const searchColumn = selectRef.current?.value;
+    const searchValue = inputFilterRef.current?.value;
+    const searchColumn = selectFilterRef.current?.value;
     if (e.key === 'Enter') {
       setPage(() => 1);
 
@@ -132,10 +129,10 @@ const Filter = ({
           className="form-select"
           id="filterName"
           defaultValue={filterColumn}
-          ref={selectRef}
+          ref={selectFilterRef}
           onChange={filterSelectHandler}
         >
-          {renderFilterOption()}
+          {renderOption(filterOptions)}
         </select>
 
         <input
@@ -144,7 +141,7 @@ const Filter = ({
           className="form-control flex-2"
           placeholder="search ..."
           defaultValue={filterText}
-          ref={inputRef}
+          ref={inputFilterRef}
           onKeyDown={filterInputKeyDownHandler}
         />
       </div>
@@ -155,7 +152,7 @@ const Filter = ({
         value={orderValue}
         onChange={orderSelectHandler}
       >
-        {renderOrderOption()}
+        {renderOption(orderOptions)}
       </select>
     </Stack>
   );
