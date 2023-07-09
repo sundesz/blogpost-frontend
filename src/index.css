@@ -162,6 +162,9 @@ a {
 .progress {
   width: 150px;
 }
+.progress-bar {
+  color: #222 !important;
+}
 
 .crud-button {
   display: flex;
