@@ -32,7 +32,7 @@ const Authors = () => {
   }
 
   if (isError) {
-    <ErrorPage error={error} />;
+    return <ErrorPage error={error} />;
   }
 
   if (!authorData?.data) {
